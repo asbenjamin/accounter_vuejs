@@ -8,6 +8,17 @@ import Clients from '../views/dashboard/Clients.vue'
 import Client from '../views/dashboard/Client.vue'
 import AddClient from '../views/dashboard/AddClient.vue'
 import EditClient from '../views/dashboard/EditClient.vue'
+
+import Customers from '../views/dashboard/Customers.vue'
+import Customer from '../views/dashboard/Customer.vue'
+import AddCustomer from '../views/dashboard/AddCustomer.vue'
+import EditCustomer from '../views/dashboard/EditCustomer.vue'
+import Receipt from '../views/dashboard/Receipt.vue'
+import Receipts from '../views/dashboard/Receipts.vue'
+import AddReceipt from '../views/dashboard/AddReceipt.vue'
+import CashFlows from '../views/dashboard/CashFlows.vue'
+
+
 import EditTeam from '../views/dashboard/EditTeam.vue'
 import Invoices from '../views/dashboard/Invoices.vue'
 import Invoice from '../views/dashboard/Invoice.vue'
@@ -99,6 +110,70 @@ const routes = [
     path: '/dashboard/clients/:id/edit',
     name: 'EditClient',
     component: EditClient,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/customers',
+    name: 'Customers',
+    component: Customers,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/customers/add',
+    name: 'AddCustomer',
+    component: AddCustomer,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/customers/:id',
+    name: 'Customer',
+    component: Customer,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/customers/:id/edit',
+    name: 'EditCustomer',
+    component: EditCustomer,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/receipts',
+    name: 'Receipts',
+    component: Receipts,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/receipts/add',
+    name: 'AddReceipt',
+    component: AddReceipt,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/receipts/:id',
+    name: 'Receipt',
+    component: Receipt,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/cashflows',
+    name: 'CashFlows',
+    component: CashFlows,
     meta: {
       requireLogin: true
     }

@@ -7,7 +7,7 @@
 
             <div class="column is-6">
                 <div class="box">
-                    <h2 class="subtitle">Unpaid invoices</h2>
+                    <h2 class="subtitle">Unpaid Invoices</h2>
 
                     <table class="table is-fullwidth">
                         <thead>
@@ -40,7 +40,40 @@
 
             <div class="column is-6">
                 <div class="box">
-                    <h2 class="subtitle">Newest clients</h2>
+                    <h2 class="subtitle">Unpaid Receipts</h2>
+
+                    <table class="table is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Due date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr
+                                v-for="receipt in unpaidReceipts"
+                                v-bind:key="receipt.id"
+                            >
+                                <td>{{ receipt.receipt_number }}</td>
+                                <td>{{ receipt.customer_name }}</td>
+                                <td>{{ receipt.gross_amount }}</td>
+                                <td>{{ receipt.get_due_date_formatted }}</td>
+                                <td>
+                                    <router-link :to="{ name: 'Receipt', params: { id: receipt.id }}">Details</router-link>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="column is-6">
+                <div class="box">
+                    <h2 class="subtitle">Newest Clients</h2>
 
                     <div
                         v-for="client in clients"
@@ -54,6 +87,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="column is-6">
+                <div class="box">
+                    <h2 class="subtitle">Newest Customers</h2>
+
+                    <div
+                        v-for="customer in customers"
+                        v-bind:key="customer.id"
+                    >
+                        <div class="box mb-2">
+                            <h3 class="is-size-4 mb-4">{{ customer.name }}</h3>
+
+                            <router-link :to="{ name: 'Customer', params: { id: customer.id }}" class="button is-light">Details</router-link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -67,11 +118,15 @@ export default {
         return {
             invoices: [],
             clients: [],
+            receipts: [],
+            customers: [],
         }
     },
     mounted() {
         this.getInvoices()
         this.getClients()
+        this.getReceipts()
+        this.getCustomers()
     },
     methods: {
         getInvoices() {
@@ -81,6 +136,20 @@ export default {
                     for (let i = 0; i < response.data.length; i++) {
                         if (!response.data[i].is_credit_for) {
                             this.invoices.push(response.data[i])
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.log(JSON.stringify(error))
+                })
+        },
+        getReceipts() {
+            axios
+                .get('/api/v1/receipts/')
+                .then(response => {
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (!response.data[i].is_credit_for) {
+                            this.receipts.push(response.data[i])
                         }
                     }
                 })
@@ -101,11 +170,28 @@ export default {
                 .catch(error => {
                     console.log(JSON.stringify(error))
                 })
+        },
+        getCustomers() {
+            axios
+                .get('/api/v1/customers/')
+                .then(response => {
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (this.customers.length <= 5) {
+                            this.customers.push(response.data[i])
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.log(JSON.stringify(error))
+                })
         }
     },
     computed: {
         unpaidInvoices() {
             return this.invoices.filter(invoice => invoice.is_paid === false)
+        },
+        unpaidReceipts() {
+            return this.receipts.filter(receipt => receipt.is_paid === false)
         },
     }
 }

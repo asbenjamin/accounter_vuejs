@@ -2,7 +2,7 @@
   <div id="wrapper">
     <nav class="navbar is-dark">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item"><strong>Invoicely</strong></router-link>
+        <router-link to="/" class="navbar-item"><strong>AccountR</strong></router-link>
       </div>
 
       <div class="navbar-menu">
@@ -11,10 +11,14 @@
             <router-link to="/dashboard" class="navbar-item">Dashboard</router-link>
             <router-link to="/dashboard/clients" class="navbar-item">Clients</router-link>
             <router-link to="/dashboard/invoices" class="navbar-item">Invoices</router-link>
+            <router-link to="/dashboard/customers" class="navbar-item">Customers</router-link>
+            <router-link to="/dashboard/receipts" class="navbar-item">Receipts</router-link>
+            <router-link to="/dashboard/cashflows" class="navbar-item">Cash Flows</router-link>
 
             <div class="navbar-item">
               <div class="buttons">
-                <router-link to="/dashboard/invoices/add" class="button is-success">Add invoice</router-link>
+                <router-link to="/dashboard/invoices/add" class="button is-warning">Add Invoice</router-link>
+                <router-link to="/dashboard/receipts/add" class="button is-success">Add Receipt</router-link>
                 <router-link to="/dashboard/my-account" class="button is-light">My account</router-link>
               </div>
             </div>      
