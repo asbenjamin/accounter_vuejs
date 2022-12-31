@@ -7,6 +7,6 @@ import VCalendar from 'v-calendar'
 import 'v-calendar/dist/style.css'
 // import 'v-calendar/lib/v-calendar.min.css'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
+axios.defaults.baseURL = 'https://accounting-service-django.onrender.com'
 
 createApp(App).use(store).use(VCalendar).use(router, axios).mount('#app')
