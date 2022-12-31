@@ -24,6 +24,8 @@ import Invoices from '../views/dashboard/Invoices.vue'
 import Invoice from '../views/dashboard/Invoice.vue'
 import AddInvoice from '../views/dashboard/AddInvoice.vue'
 
+import Calendar from '../views/dashboard/DatePickerForm.vue'
+
 import store from '../store'
 
 const routes = [
@@ -193,7 +195,15 @@ const routes = [
     meta: {
       requireLogin: true
     }
-  }
+  },
+  {
+    path: '/dashboard/calendar',
+    name: 'Calendar',
+    component: Calendar,
+    meta: {
+      requireLogin: true
+    }
+  },
 ]
 
 const router = createRouter({
